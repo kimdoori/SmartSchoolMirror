@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.Timer;
@@ -28,6 +29,8 @@ public class MainActivity extends Activity {
     private TextView school_food_title;
     private TextView school_schedule_title;
 
+    private ImageView weather_image;
+
     private final Handler timer_handler = new Handler();
     private final Handler weather_handler = new Handler();
 
@@ -44,6 +47,7 @@ public class MainActivity extends Activity {
         school_schedule_text=(TextView) findViewById(R.id.school_schedule_text);
         school_food_title=(TextView) findViewById(R.id.school_food_title);
         school_schedule_title=(TextView) findViewById(R.id.school_schedule_title);
+        weather_image=(ImageView) findViewById(R.id.weather_image);
 
         ButterKnife.bind(this);
 
@@ -52,6 +56,7 @@ public class MainActivity extends Activity {
 
 
         getSchoolInfo();
+
 
 
     }
@@ -103,18 +108,21 @@ public void getSchoolInfo(){
         weather_update_second = new TimerTask() {
             @Override
             public void run() {
-              weather_Update();
-
+                weather_Update();
             }
         };
         Timer timer = new Timer();
-        timer.schedule(weather_update_second, 0, 1800000);
+        timer.schedule(weather_update_second, 0, 1800000);//1800000 //30분마다 갱신
     }
+
+
 
     protected void weather_Update() {
         Runnable updater = new Runnable() {
             public void run() {
                 GetWeather.getWeather(getCurrentFocus(),weather_temp_text);
+                GetWeather.getWeatherIcon(getCurrentFocus(),weather_image);
+
             }
         };
         weather_handler.post(updater);

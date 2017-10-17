@@ -28,11 +28,10 @@
         />
 
     <ImageView
+        android:id="@+id/weather_image"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:background="@mipmap/ic_launcher"
         android:layout_gravity="right"
-
         />
     <TextView
         android:id="@+id/weather_text"

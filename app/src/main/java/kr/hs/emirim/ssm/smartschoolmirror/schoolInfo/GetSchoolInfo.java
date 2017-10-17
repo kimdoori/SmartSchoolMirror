@@ -120,10 +120,7 @@ public class GetSchoolInfo extends AsyncTask<Void, Void, String> {
 
     public static String toKorean(String str){
         str=str.replaceAll(System.getProperty("line.separator"),"ㅡ");
-        Log.e("sdf",str);
-
         str=str.replaceAll("[^\\uAC00-\\uD7AF\\u1100-\\u11FF\\u3130-\\u318F]","");
-        Log.e("sdf",str);
         return  str.replaceAll("ㅡ","\n");
     }
 }

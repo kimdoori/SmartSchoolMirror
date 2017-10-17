@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "888269883027",
+    "firebase_url": "https://school-smart-mirror.firebaseio.com",
+    "project_id": "school-smart-mirror",
+    "storage_bucket": "school-smart-mirror.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:888269883027:android:280df1c49d6299d0",
+        "android_client_info": {
+          "package_name": "kr.hs.emirim.ssm.smartschoolmirror"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "888269883027-oa0gqnspum5u0m6gp9svt218om9ntnhe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZONag9weLafHMymaCqsiFr6ZqRqWtRSo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

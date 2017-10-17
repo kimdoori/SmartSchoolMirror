@@ -3,23 +3,17 @@ package kr.hs.emirim.ssm.smartschoolmirror;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.View;
+import android.util.Log;
 import android.widget.TextView;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import butterknife.ButterKnife;
-import kr.hs.emirim.ssm.smartschoolmirror.weather.ApiInterface;
-import kr.hs.emirim.ssm.smartschoolmirror.weather.Repo;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.GsonConverterFactory;
-import retrofit2.Response;
-import retrofit2.Retrofit;
+import kr.hs.emirim.ssm.smartschoolmirror.date.GetDate;
+import kr.hs.emirim.ssm.smartschoolmirror.schoolInfo.School;
+import kr.hs.emirim.ssm.smartschoolmirror.schoolInfo.SchoolException;
+import kr.hs.emirim.ssm.smartschoolmirror.weather.GetWeather;
 
 public class MainActivity extends Activity {
 
@@ -29,7 +23,10 @@ public class MainActivity extends Activity {
     private TextView date_text;
     private TextView time_text;
     private TextView weather_temp_text;
-
+    private TextView school_food_text;
+    private TextView school_schedule_text;
+    private TextView school_food_title;
+    private TextView school_schedule_title;
 
     private final Handler timer_handler = new Handler();
     private final Handler weather_handler = new Handler();
@@ -43,14 +40,36 @@ public class MainActivity extends Activity {
         date_text = (TextView) findViewById(R.id.time_text);
         time_text = (TextView) findViewById(R.id.date_text);
         weather_temp_text=(TextView) findViewById(R.id.weather_text);
+        school_food_text=(TextView) findViewById(R.id.school_food_text);
+        school_schedule_text=(TextView) findViewById(R.id.school_schedule_text);
+        school_food_title=(TextView) findViewById(R.id.school_food_title);
+        school_schedule_title=(TextView) findViewById(R.id.school_schedule_title);
 
         ButterKnife.bind(this);
 
         time_updater_Start();
         weather_updater_Start();
+
+
+        getSchoolInfo();
+
+
     }
 
 
+//급식과 일정 업데이트
+public void getSchoolInfo(){
+    School api_food = new School(School.Type.HIGH, School.Region.SEOUL, "B100000439");
+    School api_schedule = new School(School.Type.HIGH, School.Region.SEOUL, "B100000639");
+
+    try {
+        api_food.getMonthlyMenu(school_food_title,school_food_text,GetDate.getYear(), GetDate.getMonth());
+        api_schedule.getMonthlySchedule(school_schedule_title,school_schedule_text,GetDate.getYear(), GetDate.getMonth());
+
+    } catch (SchoolException e) {
+        Log.e("에러",e.toString());
+    }
+}
 
 
 
@@ -71,14 +90,7 @@ public class MainActivity extends Activity {
     protected void time_Update() {
         Runnable updater = new Runnable() {
             public void run() {
-                String format_time = new String("HH : mm");
-                String format_date = new String("MM월  dd일  E요일");
-
-                SimpleDateFormat tf = new SimpleDateFormat(format_time, Locale.KOREA);
-                date_text.setText(tf.format(new Date()));
-
-                SimpleDateFormat df = new SimpleDateFormat(format_date, Locale.KOREA);
-                time_text.setText(df.format(new Date()));
+                GetDate.updateDate(date_text,time_text);
             }
         };
         timer_handler.post(updater);
@@ -96,44 +108,18 @@ public class MainActivity extends Activity {
             }
         };
         Timer timer = new Timer();
-        timer.schedule(weather_update_second, 0, 5000);
+        timer.schedule(weather_update_second, 0, 1800000);
     }
 
     protected void weather_Update() {
         Runnable updater = new Runnable() {
             public void run() {
-                getWeather(getCurrentFocus());
+                GetWeather.getWeather(getCurrentFocus(),weather_temp_text);
             }
         };
         weather_handler.post(updater);
     }
 
-    public void getWeather(View view){
-
-        String lat= "37.466375";
-        String lot = "126.932903";
-
-        Retrofit client = new Retrofit.Builder().baseUrl("http://api.openweathermap.org").addConverterFactory(GsonConverterFactory.create()).build();
-
-        ApiInterface service = client.create(ApiInterface.class);
-        Call<Repo> call = service.repo("f1a57edbaf846b218ffaaaf2af4cb08f", Double.valueOf(lat), Double.valueOf(lot),"metric");
-        call.enqueue(new Callback<Repo>() {
-            @Override
-            public void onResponse(Response<Repo> response) {
-                if (response.isSuccess()) {
-                    Repo repo = response.body();
-
-                    weather_temp_text.setText(String.valueOf(repo.getMain().getTemp())+"°C");
-                } else {
-
-                }
-            }
-
-            @Override
-            public void onFailure(Throwable t) {
-            }
-        });
-    }
 
 }
 

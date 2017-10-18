@@ -1,6 +1,8 @@
 package kr.hs.emirim.ssm.smartschoolmirror;
 
 import android.app.Activity;
+import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -15,6 +17,8 @@ import kr.hs.emirim.ssm.smartschoolmirror.date.GetDate;
 import kr.hs.emirim.ssm.smartschoolmirror.schoolInfo.School;
 import kr.hs.emirim.ssm.smartschoolmirror.schoolInfo.SchoolException;
 import kr.hs.emirim.ssm.smartschoolmirror.weather.GetWeather;
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends Activity {
 
@@ -28,17 +32,22 @@ public class MainActivity extends Activity {
     private TextView school_schedule_text;
     private TextView school_food_title;
     private TextView school_schedule_title;
-
     private ImageView weather_image;
 
     private final Handler timer_handler = new Handler();
     private final Handler weather_handler = new Handler();
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                .setDefaultFontPath("NotoSansCJKkr-Regular.otf")
+                .setFontAttrId(R.attr.fontPath)
+                .build()
+        );
+
 
         date_text = (TextView) findViewById(R.id.time_text);
         time_text = (TextView) findViewById(R.id.date_text);
@@ -48,6 +57,7 @@ public class MainActivity extends Activity {
         school_food_title=(TextView) findViewById(R.id.school_food_title);
         school_schedule_title=(TextView) findViewById(R.id.school_schedule_title);
         weather_image=(ImageView) findViewById(R.id.weather_image);
+
 
         ButterKnife.bind(this);
 
@@ -126,6 +136,10 @@ public void getSchoolInfo(){
             }
         };
         weather_handler.post(updater);
+    }
+    @Override
+    protected void attachBaseContext(Context newBase){
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
 

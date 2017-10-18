@@ -7,7 +7,8 @@
     android:layout_height="match_parent"
     android:padding="50dp"
     android:background="@color/bg"
-    tools:context="kr.hs.emirim.ssm.smartschoolmirror.MainActivity">
+    tools:context="kr.hs.emirim.ssm.smartschoolmirror.MainActivity"
+    tools:ignore="MissingPrefix">
 
     <TextView
         android:id="@+id/time_text"
@@ -16,6 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#ffffff"
+        fontPath="NotoSansCJKkr-Regular.otf"
         />
 
     <TextView
@@ -25,6 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#ffffff"
+        fontPath="NotoSansCJKkr-Regular.otf"
         />
 
     <ImageView
@@ -39,7 +42,8 @@
         android:layout_gravity="right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#ffffff"/>
+        android:textColor="#ffffff"
+        fontPath="NotoSansCJKkr-Regular.otf"        />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -57,14 +61,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#ffffff"
-                android:text="오늘의 급식"/>
+                android:text="오늘의 급식"
+                fontPath="NotoSansCJKkr-Regular.otf"                />
             <TextView
                 android:id="@+id/school_food_text"
                 android:textSize="40dp"
                 android:layout_gravity="left"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#ffffff"/>
+                android:textColor="#ffffff"
+                fontPath="NotoSansCJKkr-Regular.otf"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"
@@ -78,7 +84,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#ffffff"
-                android:text="오늘의 일정"/>
+                android:text="오늘의 일정"
+                fontPath="NotoSansCJKkr-Regular.otf"/>
             <TextView
                 android:id="@+id/school_schedule_text"
                 android:textSize="40dp"
@@ -86,7 +93,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
-                android:textColor="#ffffff"/>
+                android:textColor="#ffffff"
+                fontPath="NotoSansCJKkr-Regular.otf"/>
 
         </LinearLayout>
 

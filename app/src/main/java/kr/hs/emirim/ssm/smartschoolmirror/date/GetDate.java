@@ -1,5 +1,6 @@
 package kr.hs.emirim.ssm.smartschoolmirror.date;
 
+import android.util.Log;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
@@ -15,6 +16,8 @@ public class GetDate {
     private static int month;
     private static int date;
     private static int hour;
+    private static int minute;
+
 
 
     public static int getYear() {
@@ -41,8 +44,17 @@ public class GetDate {
     public static int getHour() {
         String format_insert_hour = new String("HH");
         SimpleDateFormat idf = new SimpleDateFormat(format_insert_hour, Locale.KOREA);
+        Log.e("시간",idf.format(new Date()));
         hour= Integer.parseInt(idf.format(new Date()));
+        Log.e("시간", String.valueOf(hour));
+
         return hour;
+    }
+    public static int getMinute() {
+        String format_insert_hour = new String("mm");
+        SimpleDateFormat idf = new SimpleDateFormat(format_insert_hour, Locale.KOREA);
+        minute= Integer.parseInt(idf.format(new Date()));
+        return minute;
     }
 
     public static void updateDate(TextView date_text, TextView time_text) {

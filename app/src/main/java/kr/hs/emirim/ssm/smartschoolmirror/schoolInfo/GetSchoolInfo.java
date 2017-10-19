@@ -20,6 +20,19 @@ import kr.hs.emirim.ssm.smartschoolmirror.date.GetDate;
 public class GetSchoolInfo extends AsyncTask<Void, Void, String> {
 
 
+    private static String mfood;
+    private static String mSchedule;
+
+    public static String getFood() {
+        return mfood;
+    }
+
+    public static String getSchedule() {
+        return mSchedule;
+    }
+
+
+
     TextView title_text;
     TextView info_text;
     String getKind;
@@ -63,6 +76,7 @@ public class GetSchoolInfo extends AsyncTask<Void, Void, String> {
                 if(getKind.equals("getMonthlySchedule")) {
                     List<SchoolSchedule> schedule = SchoolScheduleParser.parse(content);
                     updateText(true,String.valueOf(schedule.get(GetDate.getDate()-1)));
+                    mSchedule=String.valueOf(schedule.get(GetDate.getDate()-1));
 
                 }
                 else {
@@ -107,6 +121,7 @@ public class GetSchoolInfo extends AsyncTask<Void, Void, String> {
                     public void run() {
                         if(update_content){
                             info_text.setText(toKorean(result));
+                            mfood=result;
                         }
                         else if(!getKind.equals("getMonthlySchedule")){
                             title_text.setText("오늘의 "+result);

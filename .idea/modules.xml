@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/SmartSchoolMirror.iml" filepath="$PROJECT_DIR$/SmartSchoolMirror.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cmusphinx-models/cmusphinx-models.iml" filepath="$PROJECT_DIR$/cmusphinx-models/cmusphinx-models.iml" />
     </modules>
   </component>
 </project>

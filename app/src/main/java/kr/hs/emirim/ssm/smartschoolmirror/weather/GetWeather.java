@@ -23,6 +23,12 @@ import retrofit2.Retrofit;
  */
 public class GetWeather {
 
+    private static double temp;
+
+
+    public static double getTemp() {
+        return temp;
+    }
 
     public static void getWeather(final View view, final TextView weather_temp_text){
 
@@ -40,6 +46,7 @@ public class GetWeather {
                     MainRepo repo = response.body();
 
                     weather_temp_text.setText(String.valueOf(repo.getMain().getTemp())+"°C");
+                    temp=repo.getMain().getTemp();
                 } else {
 
                 }

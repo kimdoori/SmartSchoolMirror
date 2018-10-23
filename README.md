@@ -16,4 +16,5 @@ Smart Mirror for School
 * 급식 & 일정 : 교육청 공공 데이터
 
 ## Demo
+* 모니터 사용 
 ![image](https://user-images.githubusercontent.com/22957868/47329235-e89c2180-d6ae-11e8-8ca8-830a1b0d98d0.png)
